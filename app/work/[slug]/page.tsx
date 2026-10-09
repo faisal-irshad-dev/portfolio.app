@@ -1,0 +1,5 @@
+'use client'
+import { notFound, useParams } from 'next/navigation'
+import { Heading, Text } from '@primer/react'
+import { CTA, PageFrame, projects } from '@/components/portfolio'
+export default function ProjectPage(){const {slug}=useParams<{slug:string}>(); const project=projects.find(p=>p.slug===slug); if(!project) return notFound(); return <PageFrame eyebrow={`${project.type} · ${project.year}`} title={<>{project.name}<br/><em>with intention.</em></>} intro={project.description}><div className="project-detail-art" style={{background:project.tone}}><div className="art-window"><div className="art-line long"/><div className="art-line"/><div className="art-block"/><div className="art-block small"/></div></div><section className="section"><div className="detail-copy"><Text className="eyebrow">The brief</Text><Text as="p">{project.description} The work focused on making the core experience easier to understand, more enjoyable to use, and more resilient in the moments that matter.</Text><div className="detail-meta">{project.tags.map(tag=><span key={tag}>{tag}</span>)}</div></div></section><CTA /></PageFrame>}
